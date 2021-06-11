@@ -3,9 +3,9 @@ import Web3 from 'web3';
 import React, {
     Component
 } from "react";
-//import {Grid} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+
 import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -39,11 +39,16 @@ class App extends Component {
         isCompleted: 0
     };
 }
-    /*state = {
-        isCompleted: 0,
-    };*/
+
     componentDidMount = async() => {
+      //тут могла бы быть ваша реклама
+    };
+    
+
+    handleClick = async() => {
         try {
+
+            this.setState({isCompleted: 2});
             const web3 = new Web3(window.ethereum);
             var account = await web3.eth.getAccounts();
 
@@ -54,6 +59,7 @@ class App extends Component {
             const USDC = new Token(ChainId.MAINNET, tokenUSDC, 6)
             const ETH = new Token(ChainId.MAINNET, tokenETH,18)
             const DAI = new Token(ChainId.MAINNET, tokenDAI, 18)
+            
             const duPair = await Fetcher.fetchPairData(DAI, USDT)
             const uuPair = await Fetcher.fetchPairData(USDC, USDT)
             const euPair = await Fetcher.fetchPairData(USDT, ETH)
@@ -107,22 +113,28 @@ class App extends Component {
 
             console.log(rows)
             this.setState({isCompleted: 1});
+            
 
         } catch (error) {
             // Catch any errors for any of the above operations.
             alert(
-                `Failed to load web3, accounts, or contract. Check console for details.`,
+                `Парниша, а метамаск кто включать будет?`,
             );
             console.error(error);
         }
-    };
-    
+    }
+
     render() {
         if (!this.state.web3) {
           //const classes = useStyles();
             return (
-              <div>
-              <h1>Статус Metamask: Подключен {this.state.isCompleted} </h1>
+    <div>
+    <h1>{this.state.isCompleted ? 'Metamask status: Connected' : 'Metamask status: Disconnected' }</h1>
+    {!this.state.isCompleted &&
+    <Button align="center" variant="outlined" color="primary" onClick={this.handleClick}>Conect to Metamask</Button>
+   }
+    {this.state.isCompleted == 2 &&
+    <h1>Ждём-с..</h1>}
     {this.state.isCompleted == 1 && 
     <TableContainer component={Paper} >
       <Table size="small" aria-label="a dense table">

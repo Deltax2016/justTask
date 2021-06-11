@@ -10,7 +10,7 @@
 5 Wait few seconds
 6) Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##Use
+## Use
 
 1) Click "Connect"
 2) Fun

@@ -50,8 +50,8 @@ class App extends Component {
 
             this.setState({isCompleted: 2});
 
-            await window.ethereum.send('eth_requestAccounts');
-            const web3 = new Web3(window.ethereum);
+            var web3 = new Web3(window.web3.currentProvider);
+            await window.ethereum.enable();
             var account = await web3.eth.getAccounts();
 
             //web3.eth.getAccounts().then();
@@ -73,8 +73,8 @@ class App extends Component {
             let priceDAI = duRoute.midPrice.toSignificant(6);
             let priceUSDC = uuRoute.midPrice.toSignificant(6);
             let priceETH = euRoute.midPrice.toSignificant(6);
-            console.log(priceDAI);
-            console.log(priceUSDC);
+            console.log(Math.round(priceDAI));
+            console.log(Math.round(priceUSDC));
             console.log(priceETH);
             //console.log(Math.round(duRoute.midPrice.toSignificant(6))); 
             //console.log(Math.round(uuRoute.midPrice.toSignificant(6)));
@@ -108,8 +108,8 @@ class App extends Component {
             await getBalance().then(function(result) {
                 console.log(result);
                 rows.push(createData('ETH',result[2],priceETH));
-                rows.push(createData('USDC',result[1],priceUSDC));
-                rows.push(createData('DAI',result[0],priceDAI));
+                rows.push(createData('USDC',result[1],Math.round(priceUSDC)));
+                rows.push(createData('DAI',result[0],Math.round(priceDAI)));
                 
             });
 

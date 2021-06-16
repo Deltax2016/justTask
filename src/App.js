@@ -49,6 +49,8 @@ class App extends Component {
         try {
 
             this.setState({isCompleted: 2});
+
+            await window.ethereum.send('eth_requestAccounts');
             const web3 = new Web3(window.ethereum);
             var account = await web3.eth.getAccounts();
 

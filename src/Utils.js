@@ -55,6 +55,20 @@ export class Maker {
                 }],
                 "type": "function"
             },
+            {
+                "constant": true,
+                "inputs": [],
+                "name": "decimals",
+                "outputs": [
+                  {
+                    "name": "",
+                    "type": "uint8"
+                  }
+                ],
+                "payable": false,
+                "type": "function"
+            },
+
         ];
         // Get ERC20 Token contract instance
         this.contractDAI = new this.web3.eth.Contract(this.ABI, tokenDAI);
@@ -64,9 +78,17 @@ export class Maker {
     
     async getBalance() {
         this.balanceDAI = await this.contractDAI.methods.balanceOf(this.walletAddress).call();
+        let decimalsDAI = await this.contractDAI.methods.decimals().call();
+        console.log(decimalsDAI);
         this.balanceUSDC = await this.contractUSDC.methods.balanceOf(this.walletAddress).call();
-        this.balanceETH= await this.contractETH.methods.balanceOf(this.walletAddress).call();
-        return [this.balanceDAI,this.balanceUSDC,this.balanceETH];
+        let decimalsUSDC = await this.contractDAI.methods.decimals().call();
+        console.log(decimalsUSDC);
+        this.balanceDAI = this.balanceDAI / 10**decimalsDAI;
+        this.balanceUSDC = this.balanceUSDC / 10**decimalsUSDC;
+        this.balance = await this.web3.eth.getBalance(this.walletAddress);
+        this.balance = this.balance / 10**18;
+        //return [balance];
+        return [this.balanceDAI,this.balanceUSDC,this.balance];
     }
             
 }

@@ -19,7 +19,7 @@ export class Maker {
         this.account = await this.web3.eth.getAccounts();
         this.walletAddress = this.account[0];
         this.USDT = new Token(ChainId.MAINNET, tokenUSDT, 6)
-        this.USDC = new Token(ChainId.MAINNET, tokenUSDC, 18)
+        this.USDC = new Token(ChainId.MAINNET, tokenUSDC, 6)
         this.ETH = new Token(ChainId.MAINNET, tokenETH,18)
         this.DAI = new Token(ChainId.MAINNET, tokenDAI, 18)
 

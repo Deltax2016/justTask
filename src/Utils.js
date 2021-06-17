@@ -19,7 +19,7 @@ export class Maker {
         this.account = await this.web3.eth.getAccounts();
         this.walletAddress = this.account[0];
         this.USDT = new Token(ChainId.MAINNET, tokenUSDT, 6)
-        this.USDC = new Token(ChainId.MAINNET, tokenUSDC, 6)
+        this.USDC = new Token(ChainId.MAINNET, tokenUSDC, 18)
         this.ETH = new Token(ChainId.MAINNET, tokenETH,18)
         this.DAI = new Token(ChainId.MAINNET, tokenDAI, 18)
 
@@ -81,7 +81,7 @@ export class Maker {
         let decimalsDAI = await this.contractDAI.methods.decimals().call();
         console.log(decimalsDAI);
         this.balanceUSDC = await this.contractUSDC.methods.balanceOf(this.walletAddress).call();
-        let decimalsUSDC = await this.contractDAI.methods.decimals().call();
+        let decimalsUSDC = await this.contractUSDC.methods.decimals().call();
         console.log(decimalsUSDC);
         this.balanceDAI = this.balanceDAI / 10**decimalsDAI;
         this.balanceUSDC = this.balanceUSDC / 10**decimalsUSDC;

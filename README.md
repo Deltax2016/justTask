@@ -7,7 +7,7 @@
 2) Login to your metamask, using special browser extention
 3) `cd './YOUR_PATH_HERE/justTask'`
 4) Use `npm run start` to start
-5 Wait few seconds
+5) Wait few seconds
 6) Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Use
